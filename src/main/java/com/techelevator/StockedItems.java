@@ -6,10 +6,7 @@ public class StockedItems {
 
 	private String name;
 	private BigDecimal price = new BigDecimal(0);
-	
-	
-	
-	
+
 	public StockedItems(String name, BigDecimal price) {
 		this.name = name;
 		this.price = price;
@@ -22,5 +19,5 @@ public class StockedItems {
 	public BigDecimal getPrice() {
 		return price;
 	}
-	
+
 }
