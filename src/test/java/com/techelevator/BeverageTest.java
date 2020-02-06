@@ -18,4 +18,10 @@ public class BeverageTest {
 		Beverage newBev = new Beverage("Coke", new BigDecimal(2.50));
 		Assert.assertEquals(new BigDecimal(2.50), newBev.getPrice());
 	}
+	
+	@Test
+	public void check_if_the_sound_is_right() {
+		Beverage newBev = new Beverage("Coke", new BigDecimal(2.50));
+		Assert.assertEquals("Glug Glug, Yum!", newBev.getSound());
+	}
 }
