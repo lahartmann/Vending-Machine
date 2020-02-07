@@ -3,9 +3,7 @@ package com.techelevator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -27,7 +25,7 @@ public class Inventory {
 		
 	}
 	
-	List<String> list = new ArrayList<String>();
+	
 	public Map<String, StockedItems> stockInventory(File sourceFile){
 		Map<String, StockedItems> itemMap = new LinkedHashMap<String, StockedItems>();
 		try(Scanner fileScanner = new Scanner(sourceFile)){
