@@ -25,6 +25,9 @@ public class VendingMachine {
 	
 	private int numOfDimes = 0;
 	
+	private BigDecimal change = new BigDecimal(0);
+	
+//	private String changeSplit = "";
 	
 	
 	Inventory newInventory = new Inventory();
@@ -96,6 +99,12 @@ public class VendingMachine {
 	//Updated balance after purchase
 	public void balanceAfterPurchase(BigDecimal itemPrice) {
 		this.machineBalance = customerBalance.subtract(itemPrice);
+	}
+	
+	//dispense the change
+	public void dispenseTheChange() {
+		
+		
 	}
 
 }
