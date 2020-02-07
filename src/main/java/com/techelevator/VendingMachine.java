@@ -13,11 +13,11 @@ public class VendingMachine {
 	
 	private BigDecimal machineBalance = new BigDecimal(0);
 	
-	private final BigDecimal QUARTERS = new BigDecimal(.25);
+	private final double QUARTER = .25;
 	
-	private final BigDecimal NICKEL = new BigDecimal(.05);
+	private final double NICKEL = .05;
 	
-	private final BigDecimal DIME = new BigDecimal(.1);
+	private final double DIME = .10;
 	
 	private int numOfQuarters = 0;
 	
@@ -103,8 +103,14 @@ public class VendingMachine {
 	
 	//dispense the change
 	public void dispenseTheChange() {
-		
-		
+		numOfQuarters = (int) (this.machineBalance.doubleValue()/QUARTER);
+		double newBalance = this.machineBalance.doubleValue() % QUARTER;
+			numOfDimes = (int)(newBalance/DIME);
+			newBalance = newBalance % DIME;
+				numOfNickels = (int)(newBalance/NICKEL);
+			
+			System.out.println ("Your change is: " + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n" + numOfDimes + ": Dimes\n" + numOfNickels + ": Nickels" );
+		}
 	}
 
-}
+

@@ -18,12 +18,10 @@ public class UserMenu {
 		Scanner userInput = new Scanner(System.in);
 
 		VendingMachine ourMachine = new VendingMachine();
-		
-		
-		
-		
 
 		String option = "";
+		
+		String optionForPurchaseMenu = "";
 		
 		BigDecimal customerMoneyEntered = new BigDecimal(0);
 		
@@ -36,11 +34,11 @@ public class UserMenu {
 				ourMachine.displayMenuItems(); // prints out the Item Menu (Inventory)
 			} else if(option.equals("2")){
 				
-				while (!option.equals("3")) { // while Exit is not chosen in the Item Menu
+				while (true) { // while Exit is not chosen in the Item Menu
 					ourMachine.displayPurchaseMenu(); // prints out purchase menu
 					System.out.println("Please select one of the options: ");
 					
-					String optionForPurchaseMenu = userInput.nextLine(); //stores the option
+					optionForPurchaseMenu = userInput.nextLine(); //stores the option
 					if(optionForPurchaseMenu.equals("1")) { //if 1
 						ourMachine.feedMoney();//ask for amount to input
 						customerMoneyEntered = new BigDecimal(userInput.nextLine());//amount stored as BigDecimal
@@ -54,6 +52,8 @@ public class UserMenu {
 						ourMachine.purchaseMethod(optionOfItemChosen);
 						
 					} else {
+						ourMachine.dispenseTheChange();
+						break;
 						
 					}
 						
