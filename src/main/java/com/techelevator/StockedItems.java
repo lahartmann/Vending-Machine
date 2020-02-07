@@ -2,7 +2,7 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
-public abstract class StockedItems {
+public abstract class StockedItems implements Yumable {
 
 	private String name;
 	private BigDecimal price = new BigDecimal(0);
