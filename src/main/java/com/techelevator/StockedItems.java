@@ -14,8 +14,12 @@ public abstract class StockedItems {
 	}
 
 	public int getQuantity() {
+		
 		return quantity;
-	}
+		}
+		
+		
+	
 
 	public void itemPurchased() {
 		quantity--;
