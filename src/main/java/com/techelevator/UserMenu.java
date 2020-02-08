@@ -64,6 +64,11 @@ public class UserMenu {
 					}
 
 				}
+			} else if (option.equals("3")){
+				System.out.println("Goodbye!");
+				
+			}else {
+				System.out.println("This is not an option\n");
 			}
 		}
 

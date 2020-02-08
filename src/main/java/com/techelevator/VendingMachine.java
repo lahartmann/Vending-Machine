@@ -73,7 +73,7 @@ public class VendingMachine {
 
 	public void displayPurchaseMenu() {
 
-		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + machineBalance);
+		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + "$" + machineBalance);
 
 	}
 
@@ -102,15 +102,19 @@ public class VendingMachine {
 	}
 
 	// dispense the change
-	public void dispenseTheChange() {
+	public BigDecimal dispenseTheChange() {
 		numOfQuarters = (int) (this.machineBalance.doubleValue() / QUARTER);
 		double newBalance = this.machineBalance.doubleValue() % QUARTER;
 		numOfDimes = (int) (newBalance / DIME);
-		newBalance = newBalance % DIME;
-		numOfNickels = (int) (newBalance / NICKEL);
-
-		System.out.println("Your change is: " + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n" + numOfDimes
+		double newBalance1 = newBalance % DIME;
+		numOfNickels = (int) (newBalance1 / NICKEL);
+		
+		System.out.println("Your change is: $" + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n" + numOfDimes
 				+ ": Dimes\n" + numOfNickels + ": Nickels");
+		
+		return this.machineBalance = new BigDecimal(0);
+		
+		
 	}
 
 //	public void logFeedMoney() {
