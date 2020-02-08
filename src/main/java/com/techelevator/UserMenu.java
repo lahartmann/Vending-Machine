@@ -25,6 +25,8 @@ public class UserMenu {
 		String optionForPurchaseMenu = "";
 
 		BigDecimal customerMoneyEntered = new BigDecimal(0.00);
+		
+		String optionOfItemChosen = "";
 
 		while (!option.equals("3")) { // while Exit is not chosen in the Main Menu
 			ourMachine.runMainMenu(); // prints out the Main Menu
@@ -61,17 +63,31 @@ public class UserMenu {
 						ourMachine.displayMenuItems();//shows inventory
 						
 						System.out.println("Please select an item to purchase: ");
-						String optionOfItemChosen = userInput.nextLine().toUpperCase(); // slot # if valid
-						ourMachine.purchaseMethod(optionOfItemChosen); //updates the quantity and prints the sound from Yumable
 						
-						ourMachine.logAudit("> " + dateFormat.format(ourDate) + " " //prints out the transaction to the log
-								+ ourMachine.itemMap.get(optionOfItemChosen).getName() + " " + optionOfItemChosen + " $"
-								+ ourMachine.getBalance() + " " 
-								+ ourMachine.getBalance().subtract(ourMachine.itemMap.get(optionOfItemChosen).getPrice()));
-					
-						ourMachine.balanceAfterPurchase(ourMachine.itemMap.get(optionOfItemChosen).getPrice()); //updates the balance after transaction
-						//takes them back to the purchase menu
 						
+						
+						try {
+							
+							optionOfItemChosen = userInput.nextLine().toUpperCase(); // slot # is stored in optionOfItemChosen even if invalid
+							
+							ourMachine.purchaseMethod(optionOfItemChosen); //updates the quantity and prints the sound from Yumable
+							
+							ourMachine.logAudit("> " + dateFormat.format(ourDate) + " " //prints out the transaction to the log
+									+ ourMachine.itemMap.get(optionOfItemChosen).getName() + " " + optionOfItemChosen + " $"
+									+ ourMachine.getBalance() + " " 
+									+ ourMachine.getBalance().subtract(ourMachine.itemMap.get(optionOfItemChosen).getPrice()));
+						
+							ourMachine.balanceAfterPurchase(ourMachine.itemMap.get(optionOfItemChosen).getPrice()); //updates the balance after transaction
+							//takes them back to the purchase menu
+							
+			
+						} catch (Exception e){
+							
+							System.out.println("***Sorry, that slot doesn't exist!***");
+							
+						} 
+						
+	
 					} else if (optionForPurchaseMenu.equals("3")) {//gives the customer the change, logs transaction, and takes them to the Main Menu for (Inventory/Purchase/Exit)
 
 						ourMachine.logAuditSameLine(

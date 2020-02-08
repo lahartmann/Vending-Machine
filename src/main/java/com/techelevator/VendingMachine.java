@@ -81,10 +81,7 @@ public class VendingMachine {
 	// Selecting the product if product is in stock and credit is valid
 	public void purchaseMethod(String key) throws NumberFormatException {
 
-		if (!itemMap.containsKey(key)) {
-			System.out.println("Sorry, that slot doesn't exist!");
-
-		} else if (!itemMap.get(key).isInStock()) {
+		 if (!itemMap.get(key).isInStock()) {
 			System.out.println("SOLD OUT");
 
 		} else if (machineBalance.compareTo(itemMap.get(key).getPrice()) == -1) { // if balance is less than purchase
