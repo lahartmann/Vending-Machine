@@ -81,7 +81,7 @@ public class UserMenu {
 						break;
 
 					} else {
-						System.out.println("This is not an option\n");
+						System.out.println("***This is not an option!***\n");
 					}
 
 				}
@@ -91,7 +91,7 @@ public class UserMenu {
 
 			} else {
 				
-				System.out.println("This is not an option\n");
+				System.out.println("***This is not an option!***\n");
 			}
 
 		}
