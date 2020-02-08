@@ -10,8 +10,6 @@ import java.util.Map;
 
 public class VendingMachine {
 
-	private BigDecimal customerBalance = new BigDecimal(0.00);
-
 	private BigDecimal customerMoneyEntered = new BigDecimal(0.00);
 
 	private BigDecimal machineBalance = new BigDecimal(0.00);
@@ -21,7 +19,7 @@ public class VendingMachine {
 	private final double NICKEL = 5;
 
 	private final double DIME = 10;
-	
+
 	private double helper = 100;
 
 	private int numOfQuarters = 0;
@@ -30,27 +28,31 @@ public class VendingMachine {
 
 	private int numOfDimes = 0;
 
-	private BigDecimal change = new BigDecimal(0);
-
-//	private String changeSplit = "";
-
+	// instantiating inventory class using the source file
 	Inventory newInventory = new Inventory();
 
 	File sourceFile = newInventory.getInputFile();
 
 	Map<String, StockedItems> itemMap = newInventory.stockInventory(sourceFile);
 
+	// Methods
+
+	// displays the Main Menu
 	public void runMainMenu() {
 
-		System.out.println("(1) Display Vending Machine Menu, (2) Purchase, (3) Exit");
+		System.out.println("\n(1) Display Vending Machine Menu\n(2) Purchase\n(3) Exit\n");
 
 	}
 
+	// displays the inventory
 	public void displayMenuItems() {
 
+		System.out.println("Slot \t\t Product\t Price\t Quanity");
+
 		for (String key : itemMap.keySet()) {
-			if (itemMap.get(key).getQuantity() > 0) {
-				System.out.printf("%-12s %-20s %.2f %2d %n", key, itemMap.get(key).getName(),
+			if (itemMap.get(key).isInStock()) {
+
+				System.out.printf("%-12s %-20s %.2f %4d %n", key, itemMap.get(key).getName(),
 						itemMap.get(key).getPrice(), itemMap.get(key).getQuantity());
 			} else {
 				System.out.printf("%-12s %-20s %2s %n", key, itemMap.get(key).getName(), "SOLD OUT");
@@ -58,35 +60,43 @@ public class VendingMachine {
 		}
 	}
 
-	public void purchaseMethod(String key) {
+	// Displays purchase menu
+	public void displayPurchaseMenu() {
+
+		System.out.println("(1) Feed Money\n(2) Select Product\n(3) Finish Transaction\n\n"
+				+ "Current money provided: $" + machineBalance.setScale(2, RoundingMode.CEILING) + "\n");
+
+	}
+
+	// Asking to feed money
+	public void feedMoney() {
+		System.out.println("Please enter the amount: ");
+	}
+
+	// Money entered
+	public BigDecimal getCustomerMoneyEntered() {
+		return customerMoneyEntered;
+	}
+
+	// Selecting the product if product is in stock and credit is valid
+	public void purchaseMethod(String key) throws NumberFormatException {
+
 		if (!itemMap.containsKey(key)) {
 			System.out.println("Sorry, that slot doesn't exist!");
-		} else if (itemMap.get(key).getQuantity() == 0) {
+
+		} else if (!itemMap.get(key).isInStock()) {
 			System.out.println("SOLD OUT");
+
 		} else if (machineBalance.compareTo(itemMap.get(key).getPrice()) == -1) { // if balance is less than purchase
 																					// price
 			System.out.println("Please, add more money!");
 		} else if (machineBalance.compareTo(itemMap.get(key).getPrice()) >= 0) {
+			
 			System.out.println("Enjoy your " + itemMap.get(key).getName() + "! " + itemMap.get(key).getSound());
 
 			itemMap.get(key).itemPurchased();
 		}
 
-	}
-
-	public void displayPurchaseMenu() {
-
-		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + "$"
-				+ machineBalance.setScale(2, RoundingMode.CEILING));
-
-	}
-
-	public void feedMoney() {
-		System.out.println("Please enter the amount: ");
-	}
-
-	public BigDecimal getCustomerMoneyEntered() {
-		return customerMoneyEntered;
 	}
 
 	// vending machine balance after the application is open. Has a $0.00 balance by
@@ -107,22 +117,25 @@ public class VendingMachine {
 
 	// dispense the change
 	public void dispenseTheChange() {
-		numOfQuarters = (int) ((int) (this.machineBalance.doubleValue() * helper) / QUARTER); // amount of quarters for change
-		double newBalance = this.machineBalance.doubleValue() * helper % QUARTER; //remainder in pennies
-		
-		numOfDimes = (int) (newBalance / DIME); //amount of dimes in int for change
-		double newBalance1 = newBalance % DIME; // remainder in pennies
-		
-		numOfNickels = (int) (newBalance1 / NICKEL); //amount of nickels for change
+		numOfQuarters = (int) ((int) (this.machineBalance.doubleValue() * helper) / QUARTER); // amount of quarters for
+																								// change
+		double newBalance = this.machineBalance.doubleValue() * helper % QUARTER; // remainder in pennies
 
-		System.out.println("Your change is: $" + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n"
-				+ numOfDimes + ": Dimes\n" + numOfNickels + ": Nickels");
+		numOfDimes = (int) (newBalance / DIME); // amount of dimes for change
+		double newBalance1 = newBalance % DIME; // remainder in pennies
+
+		numOfNickels = (int) (newBalance1 / NICKEL); // amount of nickels for change
+
+		System.out.println("Your change is: $" + this.machineBalance + "\n\nQuarters: " + numOfQuarters + "\nDimes: "
+				+ numOfDimes + "\nNickels: " + numOfNickels);
 
 		this.machineBalance = new BigDecimal(0);
 
 	}
 
+	// printing to log on a new line
 	public void logAudit(String message) {
+		
 		String fileName = "Log.txt";
 		File newFile = new File(fileName);
 
@@ -136,7 +149,8 @@ public class VendingMachine {
 		}
 
 	}
-	
+
+	// printing to log on the same line
 	public void logAuditSameLine(String message) {
 		String fileName = "Log.txt";
 		File newFile = new File(fileName);

@@ -24,4 +24,17 @@ public class CandyTest {
 		Candy newCan = new Candy("MoonPie", new BigDecimal(1.80));
 		Assert.assertEquals("Munch Munch, Yum!", newCan.getSound());
 	}
+	
+	@Test
+	public void check_for_quantity() {
+		Candy newCan = new Candy("MoonPie", new BigDecimal(1.80));
+		Assert.assertEquals(5, newCan.getQuantity());
+	}
+	
+	@Test
+	public void check_if_is_in_stock() {
+		Candy newCan = new Candy("MoonPie", new BigDecimal(1.80));
+		Assert.assertEquals(true, newCan.isInStock());
+	
+	}
 }

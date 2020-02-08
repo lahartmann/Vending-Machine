@@ -24,5 +24,17 @@ public class ChipsTest {
 		Chips newChips = new Chips("Stackers", new BigDecimal(2.75));
 		Assert.assertEquals("Crunch Crunch, Yum!", newChips.getSound());
 	}
+	
+	@Test
+	public void check_for_quantity() {
+		Chips newChips = new Chips("Stackers", new BigDecimal(2.75));
+		Assert.assertEquals(5, newChips.getQuantity());
+	}
+	
+	@Test
+	public void check_if_is_in_stock() {
+		Chips newChips = new Chips("Stackers", new BigDecimal(2.75));
+		Assert.assertEquals(true, newChips.isInStock());
+	}
 
 }

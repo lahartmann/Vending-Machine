@@ -2,6 +2,8 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
+//creating an abstract class for subclasses to inherit from
+
 public abstract class StockedItems implements Yumable {
 
 	private String name;
@@ -14,17 +16,12 @@ public abstract class StockedItems implements Yumable {
 	}
 
 	public int getQuantity() {
-		
 		return quantity;
-		}
-		
-		
-	
+	}
 
 	public void itemPurchased() {
 		quantity--;
 	}
-
 
 	public String getName() {
 		return name;
