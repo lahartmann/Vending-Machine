@@ -1,10 +1,42 @@
-//package com.techelevator;
+
+
+package com.techelevator;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Audit {
+	
+//	public void logFeedMoney() {
+//		String fileName = "Log.txt";
+//		File newFile = new File(fileName);
 //
-//import java.io.File;
-//import java.io.IOException;
-//import java.io.PrintWriter;
+//		try (FileWriter fileWriter = new FileWriter(newFile, true)) {
+//			PrintWriter writer = new PrintWriter(fileWriter);
 //
-//public class Audit {
+//			writer.println("FEED MONEY: $" +  customerMoneyEntered + machineBalance);
+//
+//		} catch (IOException e) {
+//			System.out.println("File not found");
+//		}
+//
+//	}
+//
+//	public void logPurchaseProduct() {
+//		String fileName = "Log.txt";
+//		File newFile = new File(fileName);
+//
+//		try (FileWriter fileWriter = new FileWriter(newFile, true)) {
+//			PrintWriter writer = new PrintWriter(fileWriter);
+//
+//			writer.println("GIVE CHANGE: $" + + " $" + /*itemMap.get(key).getPrice());*/
+//
+//		} catch (IOException e) {
+//			System.out.println("File not found");
+//		}
+
+	}
 //
 //	public void checkAuditFile() {
 //
@@ -27,4 +59,5 @@
 //
 //	}
 //
-//}
+
+	
