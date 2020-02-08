@@ -66,7 +66,7 @@ public class VendingMachine {
 			System.out.println("Please, add more money!");
 		} else if (machineBalance.compareTo(itemMap.get(key).getPrice()) >= 0) {
 			System.out.println("Enjoy your " + itemMap.get(key).getName() + "! " + itemMap.get(key).getSound());
-			machineBalance = machineBalance.subtract(itemMap.get(key).getPrice());
+
 			itemMap.get(key).itemPurchased();
 		}
 
@@ -74,7 +74,8 @@ public class VendingMachine {
 
 	public void displayPurchaseMenu() {
 
-		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + "$" + machineBalance.setScale(2, RoundingMode.CEILING));
+		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + "$"
+				+ machineBalance.setScale(2, RoundingMode.CEILING));
 
 	}
 
@@ -89,7 +90,7 @@ public class VendingMachine {
 	// vending machine balance after the application is open. Has a $0.00 balance by
 	// default
 	public BigDecimal getBalance() {
-		return machineBalance;
+		return machineBalance.setScale(2, RoundingMode.CEILING);
 	}
 
 	// UPDATED BALANCE AFTER CUSTOMER'S MONEY INPUT
@@ -99,7 +100,7 @@ public class VendingMachine {
 
 	// Updated balance after purchase
 	public void balanceAfterPurchase(BigDecimal itemPrice) {
-		this.machineBalance = customerBalance.subtract(itemPrice);
+		this.machineBalance = machineBalance.subtract(itemPrice);
 	}
 
 	// dispense the change
@@ -109,45 +110,42 @@ public class VendingMachine {
 		numOfDimes = (int) (newBalance / DIME);
 		double newBalance1 = newBalance % DIME;
 		numOfNickels = (int) (newBalance1 / NICKEL);
-			
-		 
-		
-		System.out.println("Your change is: $" + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n" + numOfDimes
-				+ ": Dimes\n" + numOfNickels + ": Nickels");
-		
+
+		System.out.println("Your change is: $" + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n"
+				+ numOfDimes + ": Dimes\n" + numOfNickels + ": Nickels");
+
 		this.machineBalance = new BigDecimal(0);
-			
-	}	
+
 	}
 
-//	public void logFeedMoney() {
-//		String fileName = "Log.txt";
-//		File newFile = new File(fileName);
-//
-//		try (FileWriter fileWriter = new FileWriter(newFile, true)) {
-//			PrintWriter writer = new PrintWriter(fileWriter);
-//
-//			writer.println("FEED MONEY: $" + customerMoneyEntered + machineBalance);
-//
-//		} catch (IOException e) {
-//			System.out.println("File not found");
-//		}
-//
-//	}
-//
-//	public void logPurchaseProduct() {
-//		String fileName = "Log.txt";
-//		File newFile = new File(fileName);
-//
-//		try (FileWriter fileWriter = new FileWriter(newFile, true)) {
-//			PrintWriter writer = new PrintWriter(fileWriter);
-//
-//			writer.println("GIVE CHANGE: $" + machineBalance + " $" + /*itemMap.get(key).getPrice());*/
-//
-//		} catch (IOException e) {
-//			System.out.println("File not found");
-//		}
-//
-//	}
+	public void logAudit(String message) {
+		String fileName = "Log.txt";
+		File newFile = new File(fileName);
 
+		try (FileWriter fileWriter = new FileWriter(newFile, true)) {
+			PrintWriter writer = new PrintWriter(fileWriter);
 
+			writer.println(message);
+
+		} catch (IOException e) {
+			System.out.println("File not found");
+		}
+
+	}
+	
+	public void logAuditSameLine(String message) {
+		String fileName = "Log.txt";
+		File newFile = new File(fileName);
+
+		try (FileWriter fileWriter = new FileWriter(newFile, true)) {
+			PrintWriter writer = new PrintWriter(fileWriter);
+
+			writer.print(message);
+
+		} catch (IOException e) {
+			System.out.println("File not found");
+		}
+
+	}
+
+}
