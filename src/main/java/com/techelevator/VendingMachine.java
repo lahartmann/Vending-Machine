@@ -5,15 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 
 public class VendingMachine {
 
-	private BigDecimal customerBalance = new BigDecimal(0);
+	private BigDecimal customerBalance = new BigDecimal(0.00);
 
-	private BigDecimal customerMoneyEntered = new BigDecimal(0);
+	private BigDecimal customerMoneyEntered = new BigDecimal(0.00);
 
-	private BigDecimal machineBalance = new BigDecimal(0);
+	private BigDecimal machineBalance = new BigDecimal(0.00);
 
 	private final double QUARTER = .25;
 
@@ -73,7 +74,7 @@ public class VendingMachine {
 
 	public void displayPurchaseMenu() {
 
-		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + "$" + machineBalance);
+		System.out.println("(1) Feed Money, (2) Select Product, (3) Finish Transaction, " + "$" + machineBalance.setScale(2, RoundingMode.CEILING));
 
 	}
 
@@ -102,19 +103,21 @@ public class VendingMachine {
 	}
 
 	// dispense the change
-	public BigDecimal dispenseTheChange() {
+	public void dispenseTheChange() {
 		numOfQuarters = (int) (this.machineBalance.doubleValue() / QUARTER);
 		double newBalance = this.machineBalance.doubleValue() % QUARTER;
 		numOfDimes = (int) (newBalance / DIME);
 		double newBalance1 = newBalance % DIME;
 		numOfNickels = (int) (newBalance1 / NICKEL);
+			
+		 
 		
 		System.out.println("Your change is: $" + this.machineBalance + "\n" + numOfQuarters + ": Quarters\n" + numOfDimes
 				+ ": Dimes\n" + numOfNickels + ": Nickels");
 		
-		return this.machineBalance = new BigDecimal(0);
-		
-		
+		this.machineBalance = new BigDecimal(0);
+			
+	}	
 	}
 
 //	public void logFeedMoney() {
@@ -147,4 +150,4 @@ public class VendingMachine {
 //
 //	}
 
-}
+

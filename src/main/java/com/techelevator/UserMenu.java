@@ -28,7 +28,7 @@ public class UserMenu {
 
 		String optionForPurchaseMenu = "";
 
-		BigDecimal customerMoneyEntered = new BigDecimal(0);
+		BigDecimal customerMoneyEntered = new BigDecimal(0.00);
 
 		while (!option.equals("3")) { // while Exit is not chosen in the Main Menu
 			ourMachine.runMainMenu(); // prints out the Main Menu
@@ -56,11 +56,13 @@ public class UserMenu {
 						String optionOfItemChosen = userInput.nextLine().toUpperCase(); // slot #
 						ourMachine.purchaseMethod(optionOfItemChosen);
 
-					} else {
+					} else if (optionForPurchaseMenu.equals("3")){
 						ourMachine.dispenseTheChange();
 						//record the transaction in log.txt
 						break;
 
+					} else {
+						System.out.println("This is not an option\n");
 					}
 
 				}
