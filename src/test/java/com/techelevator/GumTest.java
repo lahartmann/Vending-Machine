@@ -44,5 +44,22 @@ public class GumTest {
 
 		Assert.assertEquals(true, newGum.isInStock());
 	}
+	
+	@Test
+	public void check_if_out_of_stock() {
+		newGum.itemPurchased();
+		newGum.itemPurchased();
+		newGum.itemPurchased();
+		newGum.itemPurchased();
+		newGum.itemPurchased();
+		Assert.assertEquals(false, newGum.isInStock());
+	}
+	
+	@Test
+	public void check_if_item_purchased() {
+		newGum.itemPurchased();
+		Assert.assertEquals(4, newGum.getQuantity());
+	}
+	
 
 }

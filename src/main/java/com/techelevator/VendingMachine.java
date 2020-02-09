@@ -79,21 +79,23 @@ public class VendingMachine {
 	}
 
 	// Selecting the product if product is in stock and credit is valid
-	public void purchaseMethod(String key) throws NumberFormatException {
-
+	public void purchaseMethod(String key)  {
+		try {
 		 if (!itemMap.get(key).isInStock()) {
 			System.out.println("SOLD OUT");
 
 		} else if (machineBalance.compareTo(itemMap.get(key).getPrice()) == -1) { // if balance is less than purchase
 																					// price
-			System.out.println("Please, add more money!");
+			System.out.println("Please add more money!");
 		} else if (machineBalance.compareTo(itemMap.get(key).getPrice()) >= 0) {
 			
 			System.out.println("Enjoy your " + itemMap.get(key).getName() + "! " + itemMap.get(key).getSound());
 
 			itemMap.get(key).itemPurchased();
 		}
-
+		} catch (NumberFormatException e) {
+			System.out.println ("***This is not a valid slot***");
+		}
 	}
 
 	// vending machine balance after the application is open. Has a $0.00 balance by
