@@ -19,10 +19,8 @@ public class VendingMachine {
 	private final int NICKEL = 5;
 
 	private final int DIME = 10;
-
-	private int helper = 100;
 	
-	private BigDecimal helperDec = new BigDecimal (100);
+	private BigDecimal helper = new BigDecimal (100);
 
 	private int numOfQuarters = 0;
 
@@ -116,11 +114,12 @@ public class VendingMachine {
 
 	// dispense the change
 	public void dispenseTheChange() {
-		BigDecimal balanceInPennies = new BigDecimal(0);
-		balanceInPennies = this.machineBalance.multiply(helperDec);
+		BigDecimal balanceInPennies = new BigDecimal(0);  
 		
-		numOfQuarters = balanceInPennies.intValue() / QUARTER; // amount of quarters for
-																								// change
+		balanceInPennies = this.machineBalance.multiply(helper);  //machine balance in pennies
+		
+		numOfQuarters = balanceInPennies.intValue() / QUARTER; // amount of quarters for change
+																								
 		int newBalance = balanceInPennies.intValue() % QUARTER; // remainder in pennies
 
 		numOfDimes = (int) (newBalance / DIME); // amount of dimes for change

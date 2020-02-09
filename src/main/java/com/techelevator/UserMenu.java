@@ -72,13 +72,15 @@ public class UserMenu {
 							
 							ourMachine.purchaseMethod(optionOfItemChosen); //updates the quantity and prints the sound from Yumable
 							
+							if (ourMachine.getBalance().compareTo(ourMachine.itemMap.get(optionOfItemChosen).getPrice()) >= 0) {
 							ourMachine.logAudit("> " + dateFormat.format(ourDate) + " " //prints out the transaction to the log
 									+ ourMachine.itemMap.get(optionOfItemChosen).getName() + " " + optionOfItemChosen + " $"
 									+ ourMachine.getBalance() + " " 
 									+ ourMachine.getBalance().subtract(ourMachine.itemMap.get(optionOfItemChosen).getPrice()));
-						
-							ourMachine.balanceAfterPurchase(ourMachine.itemMap.get(optionOfItemChosen).getPrice()); //updates the balance after transaction
-							//takes them back to the purchase menu
+							
+							
+							ourMachine.balanceAfterPurchase(ourMachine.itemMap.get(optionOfItemChosen).getPrice()); 
+							}//updates the balance after transaction and takes them back to the purchase menu
 							
 			
 						} catch (Exception e){
@@ -86,6 +88,7 @@ public class UserMenu {
 							System.out.println("***Sorry, that slot doesn't exist!***");
 							
 						} 
+						
 						
 	
 					} else if (optionForPurchaseMenu.equals("3")) {//gives the customer the change, logs transaction, and takes them to the Main Menu for (Inventory/Purchase/Exit)
